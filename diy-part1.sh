@@ -24,11 +24,13 @@ EOF
 
 # 版本号里显示一个自己的名字（Yufeng build $(TZ=UTC-8 date "+%Y.%m.%d") @ 这些都是后增加的）
 sed -i "s/OpenWrt /${Yufeng} Compiled in $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" $ZZZ
+                                              
+# 选择bootstrap为默认主题
+sed -i 's/luci-theme-bootstrap/luci-theme-bootstrap/g' feeds/luci/collections/luci/Makefile                    
 
 # Uncomment a feed source
-sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
-
+sed -i 's/^#\(.*small8\)/\1/' feeds.conf.default
 # Add a feed source
-echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
+#echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 #echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 echo 'src-git small8 https://github.com/kenzok8/small-package' >>feeds.conf.default
